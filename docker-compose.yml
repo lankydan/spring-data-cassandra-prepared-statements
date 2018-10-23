@@ -1,0 +1,10 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      args:
+        JAR_FILE: /spring-data-cassandra-prepared-statements-1.0.0.jar
+    restart: always
+  cassandra:
+    image: "cassandra"
