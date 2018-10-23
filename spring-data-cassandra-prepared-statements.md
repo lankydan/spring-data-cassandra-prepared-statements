@@ -21,6 +21,7 @@ Using Spring Boot `2.0.5.RELEASE` will pull in `2.0.10.RELEASE` of Spring Data C
 
 ### Using Prepared Statements
 
+Let's go straight in:
 ```java
 @Repository
 public class PersonRepository extends SimpleCassandraRepository<Person, PersonKey> {
@@ -119,8 +120,6 @@ private BoundStatement findByFirstNameAndDateOfBirthQuery(
       .setDate("date_of_birth", toCqlDate(dateOfBirth));
 }
 ```
-Ignore the first method for now, we will get back to that in a moment.
-
 `CachedPreparedStatementCreator` does exactly what it says... It creates cached Prepared Statements. The `of` method takes in the `cache` defined when the bean is instantiated and creates a new query as defined by the second parameter. If the query is one that has already been registered recently, i.e it is in the cache already. Then the query is pulled from there rather than going through the whole process of registering a new statement.
 
 The query passed in is a `RegularStatement` which is converted to a `PreparedStatement` by calling `createPreparedStatement` (duh I guess). We are now able to bind values to query so it actually does something useful.
